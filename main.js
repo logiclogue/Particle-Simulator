@@ -58,8 +58,13 @@ var Particle = function (_x, _y) {
 
 var mainLoop = function () {
 	// refresh the screen
-	ctx.clearRect(0, 0, c.width, c.height);
+	ctx.globalAlpha = 0.1;
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillRect(0, 0, c.width, c.height);
+	ctx.fillStyle = "#000000";
+	ctx.globalAlpha = 1.0;
 	
+	// draw particles
 	updateParticles();
 }
 
@@ -96,5 +101,5 @@ function radToDeg(radians) {
 	moon.angle = Math.PI;
 
 	var paul = new Particle(200, 100);
-	paul.mass = 10;
+	paul.mass = 2;
 }());
