@@ -16,20 +16,42 @@ var Particle = function (_x, _y) {
 	self.y = _y;
 	self.angle = 0;
 	self.speed = 0;
-	self.mass = 10;
+	self.mass = 1;
+
+
+	var addVelocity = function (speed, direction) {
+		var o1 = Math.sin(self.angle) * self.speed;
+		var a1 = Math.cos(self.angle) * self.speed;
+		var o2 = Math.sin(direction) * speed;
+		var a2 = Math.cos(direction) * speed;
+		var opp = o1 + o2;
+		var adj = a1 + a2;
+
+		self.angle = Math.atan2(opp, adj);
+		self.speed = Math.sqrt(Math.pow(opp, 2) + Math.pow(adj, 2));
+	};
+
+	var updatePos = function () {
+		self.x += Math.sin(self.angle) * self.speed;
+		self.y += -Math.cos(self.angle) * self.speed;
+	};
 	
+
 	self.update = function () {
-		self.x += Math.sin(degToRad(self.angle)) * self.speed;
-		self.y += -Math.cos(degToRad(self.angle)) * self.speed;
-		
+		updatePos();
+
 		// gravity
 		for (var i = 0, max = particles.length; i < max; i += 1) {
 			if (particles[i] !== self) {
-				self.speed += (self.mass * particles[i].mass) / Math.pow(Math.sqrt(Math.pow(particles[i].x - self.x, 2) + Math.pow(particles[i].y - self.y, 2)), 2);
-				self.angle = Math.atan(Math.sqrt(Math.pow(particles[i].x - self.x, 2) + Math.pow(particles[i].y - self.y, 2)));
+				var force = (100 * self.mass * particles[i].mass) / Math.pow(Math.sqrt(Math.pow(particles[i].x - self.x, 2) + Math.pow(particles[i].y - self.y, 2)), 2);
+				var speed = force / self.mass;
+				var angle = Math.atan2(particles[i].y - self.y, particles[i].x - self.x) + (Math.PI / 2);
+
+				addVelocity(speed, angle);
 			}
 		}
 	};
+
 	
 	particles.push(self);
 };
@@ -49,7 +71,7 @@ function updateParticles() {
 		particles[i].update();
 		ctx.lineTo(particles[i].x, particles[i].y);
 		ctx.stroke();
-		ctx.fillRect(particles[i].x, particles[i].y, 10, 10);
+		ctx.fillRect(particles[i].x - 5, particles[i].y - 5, 10, 10);
 	}
 }
 
@@ -66,9 +88,13 @@ function radToDeg(radians) {
 	setInterval(mainLoop, 1000/60);
 	
 	var earth = new Particle(500, 500);
-	var moon = new Particle(50, 50);
 	earth.speed = 1;
-	
-	
-	console.log((10 * 1) / Math.pow(1, 2));
+	earth.angle = 0;
+
+	var moon = new Particle(50, 50);
+	moon.speed = 1;
+	moon.angle = Math.PI;
+
+	var paul = new Particle(200, 100);
+	paul.mass = 10;
 }());
