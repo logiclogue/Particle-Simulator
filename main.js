@@ -3,6 +3,10 @@
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 var particles = [];
+var pos = {
+	x: 0,
+	y: 0
+};
 
 c.width = document.body.clientWidth;
 c.height = document.body.clientHeight;
@@ -17,6 +21,7 @@ var Particle = function (_x, _y) {
 	self.angle = 0;
 	self.speed = 0;
 	self.mass = 1;
+	self.isFocus = false;
 
 
 	var addVelocity = function (speed, direction) {
@@ -34,6 +39,12 @@ var Particle = function (_x, _y) {
 	var updatePos = function () {
 		self.x += Math.sin(self.angle) * self.speed;
 		self.y += -Math.cos(self.angle) * self.speed;
+
+		// move camera if is the focus
+		if (self.isFocus) {
+			pos.x = self.x;
+			pos.y = self.y;
+		}
 	};
 	
 
@@ -50,6 +61,14 @@ var Particle = function (_x, _y) {
 				addVelocity(speed, angle);
 			}
 		}
+	};
+
+	self.focus = function () {
+		for (var i = 0, max = particles.length; i < max; i += 1) {
+			particles[i].isFocus = false;
+		}
+
+		self.isFocus = true;
 	};
 
 	
@@ -71,12 +90,11 @@ var mainLoop = function () {
 function updateParticles() {
 	// update all particles and draw them
 	for (var i = 0, max = particles.length; i < max; i += 1) {
-		ctx.beginPath();
-		ctx.moveTo(particles[i].x, particles[i].y);
 		particles[i].update();
-		ctx.lineTo(particles[i].x, particles[i].y);
-		ctx.stroke();
-		ctx.fillRect(particles[i].x - 5, particles[i].y - 5, 10, 10);
+
+		ctx.beginPath();
+		ctx.arc(particles[i].x - pos.x + (c.width / 2), particles[i].y - pos.y + (c.height / 2), particles[i].mass, 0, 2 * Math.PI);
+		ctx.fill();
 	}
 }
 
@@ -92,14 +110,16 @@ function radToDeg(radians) {
 (function () {
 	setInterval(mainLoop, 1000/60);
 	
-	var earth = new Particle(500, 500);
-	earth.speed = 1;
+	var earth = new Particle(100, 100);
+	earth.speed = 0.8;
 	earth.angle = 0;
 
 	var moon = new Particle(50, 50);
-	moon.speed = 1;
+	moon.speed = 0.8;
 	moon.angle = Math.PI;
 
 	var paul = new Particle(200, 100);
-	paul.mass = 2;
+	paul.mass = 1;
+
+	//paul.focus();
 }());
