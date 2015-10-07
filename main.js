@@ -8,8 +8,8 @@ var pos = {
 	y: 0
 };
 
-c.width = document.body.clientWidth;
-c.height = document.body.clientHeight;
+c.width = window.innerWidth;
+c.height = window.innerHeight;
 
 
 
@@ -38,12 +38,15 @@ var Particle = function (_x, _y) {
 
 	var checkCollision = function () {
 		for (var i = 0, max = particles.length; i < max; i += 1) {
+			// if the particle is not itself
 			if (particles[i] !== self) {
-				if (Math.sqrt(Math.pow(particles[i].y - self.y, 2) + Math.pow(particles[i].x - self.x, 2)) < Math.sqrt(particles[i].mass + self.mass)) {
+				// if the particle is colliding
+				if (Math.sqrt(Math.pow(particles[i].y - self.y, 2) + Math.pow(particles[i].x - self.x, 2)) < Math.sqrt(particles[i].mass + self.mass) && self.mass > particles[i].mass) {
 					self.mass += particles[i].mass;
 					self.speed = 0;
 					particles[i].destroy();
 
+					// decrement to prevent error
 					i -= 1;
 					max -= 1;
 				}
@@ -115,7 +118,7 @@ function updateParticles() {
 			particles[i].update();
 
 			ctx.beginPath();
-			ctx.arc(particles[i].x - pos.x + (c.width / 2), particles[i].y - pos.y + (c.height / 2), Math.sqrt(particles[i].mass), 0, 2 * Math.PI);
+			ctx.arc(particles[i].x/* - pos.x + (c.width / 2)*/, particles[i].y/* - pos.y + (c.height / 2)*/, Math.sqrt(particles[i].mass), 0, 2 * Math.PI);
 			ctx.fill();
 		}
 		catch (e) {}
@@ -136,7 +139,7 @@ function radToDeg(radians) {
 	
 	// spawn particles
 	for (var i = 0; i < 100; i += 1) {
-		var theParticle = new Particle(200 * Math.random(), 200 * Math.random());
+		var theParticle = new Particle(c.width * Math.random(), c.height * Math.random());
 
 		theParticle.mass = 1 * Math.random();
 	}
