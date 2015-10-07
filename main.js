@@ -36,6 +36,21 @@ var Particle = function (_x, _y) {
 		self.speed = Math.sqrt(Math.pow(opp, 2) + Math.pow(adj, 2));
 	};
 
+	var checkCollision = function () {
+		for (var i = 0, max = particles.length; i < max; i += 1) {
+			if (particles[i] !== self) {
+				if (Math.sqrt(Math.pow(particles[i].y - self.y, 2) + Math.pow(particles[i].x - self.x, 2)) < Math.sqrt(particles[i].mass + self.mass)) {
+					self.mass += particles[i].mass;
+					self.speed = 0;
+					particles[i].destroy();
+
+					i -= 1;
+					max -= 1;
+				}
+			}
+		}
+	};
+
 	var updatePos = function () {
 		self.x += Math.sin(self.angle) * self.speed;
 		self.y += -Math.cos(self.angle) * self.speed;
@@ -50,11 +65,13 @@ var Particle = function (_x, _y) {
 
 	self.update = function () {
 		updatePos();
+		checkCollision();
 
 		// gravity
 		for (var i = 0, max = particles.length; i < max; i += 1) {
 			if (particles[i] !== self) {
-				var force = (100 * self.mass * particles[i].mass) / Math.pow(Math.sqrt(Math.pow(particles[i].x - self.x, 2) + Math.pow(particles[i].y - self.y, 2)), 2);
+				var distance = Math.pow(Math.sqrt(Math.pow(particles[i].x - self.x, 2) + Math.pow(particles[i].y - self.y, 2)), 2);
+				var force = (self.mass * particles[i].mass) / distance;
 				var speed = force / self.mass;
 				var angle = Math.atan2(particles[i].y - self.y, particles[i].x - self.x) + (Math.PI / 2);
 
@@ -71,17 +88,21 @@ var Particle = function (_x, _y) {
 		self.isFocus = true;
 	};
 
+	self.destroy = function () {
+		particles.splice(particles.indexOf(self), 1);
+	};
+
 	
 	particles.push(self);
 };
 
 var mainLoop = function () {
 	// refresh the screen
-	ctx.globalAlpha = 0.1;
+	ctx.globalAlpha = 1;
 	ctx.fillStyle = "#FFFFFF";
 	ctx.fillRect(0, 0, c.width, c.height);
 	ctx.fillStyle = "#000000";
-	ctx.globalAlpha = 1.0;
+	ctx.globalAlpha = 1;
 	
 	// draw particles
 	updateParticles();
@@ -90,11 +111,14 @@ var mainLoop = function () {
 function updateParticles() {
 	// update all particles and draw them
 	for (var i = 0, max = particles.length; i < max; i += 1) {
-		particles[i].update();
+		try {
+			particles[i].update();
 
-		ctx.beginPath();
-		ctx.arc(particles[i].x - pos.x + (c.width / 2), particles[i].y - pos.y + (c.height / 2), particles[i].mass, 0, 2 * Math.PI);
-		ctx.fill();
+			ctx.beginPath();
+			ctx.arc(particles[i].x - pos.x + (c.width / 2), particles[i].y - pos.y + (c.height / 2), Math.sqrt(particles[i].mass), 0, 2 * Math.PI);
+			ctx.fill();
+		}
+		catch (e) {}
 	}
 }
 
@@ -110,16 +134,10 @@ function radToDeg(radians) {
 (function () {
 	setInterval(mainLoop, 1000/60);
 	
-	var earth = new Particle(100, 100);
-	earth.speed = 0.8;
-	earth.angle = 0;
+	// spawn particles
+	for (var i = 0; i < 100; i += 1) {
+		var theParticle = new Particle(200 * Math.random(), 200 * Math.random());
 
-	var moon = new Particle(50, 50);
-	moon.speed = 0.8;
-	moon.angle = Math.PI;
-
-	var paul = new Particle(200, 100);
-	paul.mass = 1;
-
-	//paul.focus();
+		theParticle.mass = 1 * Math.random();
+	}
 }());
