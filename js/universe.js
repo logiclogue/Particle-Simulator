@@ -18,7 +18,7 @@ var Universe = (function (self) {
 
 	function updateParticles() {
 		// update all particles and draw them
-		for (var i = 0, max = particles.length; i < max; i += 1) {
+		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			try {
 				self.particles[i].update();
 

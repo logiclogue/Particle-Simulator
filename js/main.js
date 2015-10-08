@@ -3,7 +3,7 @@
 
 var Main = (function (self) {
 	self.c = document.getElementById("myCanvas");
-	self.ctx = c.getContext("2d");
+	self.ctx = self.c.getContext("2d");
 	self.pos = {
 		x: 0,
 		y: 0
@@ -14,4 +14,7 @@ var Main = (function (self) {
 		self.c.width = window.innerWidth;
 		self.c.height = window.innerHeight;
 	}());
+
+
+	return self;
 }({}));
