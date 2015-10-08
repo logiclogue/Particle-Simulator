@@ -1,7 +1,4 @@
-var Universe = (function () {
-	var self = this;
-
-
+var Universe = (function (self) {
 	var interval;
 
 	self.particles = [];
@@ -9,11 +6,11 @@ var Universe = (function () {
 
 	function mainLoop() {
 		// refresh the screen
-		ctx.globalAlpha = 1;
-		ctx.fillStyle = "#FFFFFF";
-		ctx.fillRect(0, 0, c.width, c.height);
-		ctx.fillStyle = "#000000";
-		ctx.globalAlpha = 1;
+		Main.ctx.globalAlpha = 1;
+		Main.ctx.fillStyle = "#FFFFFF";
+		Main.ctx.fillRect(0, 0, Main.c.width, Main.c.height);
+		Main.ctx.fillStyle = "#000000";
+		Main.ctx.globalAlpha = 1;
 		
 		// draw particles
 		updateParticles();
@@ -25,9 +22,9 @@ var Universe = (function () {
 			try {
 				self.particles[i].update();
 
-				ctx.beginPath();
-				ctx.arc(self.particles[i].x/* - pos.x + (c.width / 2)*/, self.particles[i].y/* - pos.y + (c.height / 2)*/, Math.sqrt(self.particles[i].mass), 0, 2 * Math.PI);
-				ctx.fill();
+				Main.ctx.beginPath();
+				Main.ctx.arc(self.particles[i].x/* - pos.x + (Main.c.width / 2)*/, self.particles[i].y/* - pos.y + (Main.c.height / 2)*/, Math.sqrt(self.particles[i].mass), 0, 2 * Math.PI);
+				Main.ctx.fill();
 			}
 			catch (e) {}
 		}
@@ -40,4 +37,4 @@ var Universe = (function () {
 
 
 	return self;
-}());
+}({}));
