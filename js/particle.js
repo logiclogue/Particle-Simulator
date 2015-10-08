@@ -1,15 +1,18 @@
-var Particle = function (_x, _y) {
-	var self = this;
-	
-	self.x = _x;
-	self.y = _y;
-	self.angle = 0;
-	self.speed = 0;
-	self.mass = 1;
-	self.isFocus = false;
+var Particle = (function () {
+	function self(_x, _y) {
+		this.x = _x;
+		this.y = _y;
+		this.angle = 0;
+		this.speed = 0;
+		this.mass = 1;
+		this.isFocus = false;
 
 
-	var addVelocity = function (speed, direction) {
+		Universe.particles.push(this);
+	}
+
+
+	function addVelocity(self, speed, direction) {
 		var o1 = Math.sin(self.angle) * self.speed;
 		var a1 = Math.cos(self.angle) * self.speed;
 		var o2 = Math.sin(direction) * speed;
@@ -21,7 +24,7 @@ var Particle = function (_x, _y) {
 		self.speed = Math.sqrt(Math.pow(opp, 2) + Math.pow(adj, 2));
 	};
 
-	var checkCollision = function () {
+	function checkCollision(self) {
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
 			// if the particle is not itself
 			// if the particle is colliding
@@ -37,7 +40,7 @@ var Particle = function (_x, _y) {
 		}
 	};
 
-	var updatePos = function () {
+	function updatePos(self) {
 		self.x += Math.sin(self.angle) * self.speed;
 		self.y += -Math.cos(self.angle) * self.speed;
 
@@ -49,35 +52,35 @@ var Particle = function (_x, _y) {
 	};
 	
 
-	self.update = function () {
-		updatePos();
-		checkCollision();
+	self.prototype.update = function () {
+		updatePos(this);
+		checkCollision(this);
 
 		// gravity
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
-			if (Universe.particles[i] !== self) {
-				var distance = Math.pow(Math.sqrt(Math.pow(Universe.particles[i].x - self.x, 2) + Math.pow(Universe.particles[i].y - self.y, 2)), 2);
-				var force = (self.mass * Universe.particles[i].mass) / distance;
-				var speed = force / self.mass;
-				var angle = Math.atan2(Universe.particles[i].y - self.y, Universe.particles[i].x - self.x) + (Math.PI / 2);
+			if (Universe.particles[i] !== this) {
+				var distance = Math.pow(Math.sqrt(Math.pow(Universe.particles[i].x - this.x, 2) + Math.pow(Universe.particles[i].y - this.y, 2)), 2);
+				var force = (this.mass * Universe.particles[i].mass) / distance;
+				var speed = force / this.mass;
+				var angle = Math.atan2(Universe.particles[i].y - this.y, Universe.particles[i].x - this.x) + (Math.PI / 2);
 
-				addVelocity(speed, angle);
+				addVelocity(this, speed, angle);
 			}
 		}
 	};
 
-	self.focus = function () {
+	self.prototype.focus = function () {
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
 			Universe.particles[i].isFocus = false;
 		}
 
-		self.isFocus = true;
+		this.isFocus = true;
 	};
 
-	self.destroy = function () {
-		Universe.particles.splice(Universe.particles.indexOf(self), 1);
+	self.prototype.destroy = function () {
+		Universe.particles.splice(Universe.particles.indexOf(this), 1);
 	};
 
-	
-	Universe.particles.push(self);
-};
+
+	return self;
+}());
