@@ -5,6 +5,7 @@ var Particle = (function () {
 		this.angle = 0;
 		this.speed = 0;
 		this.mass = 1;
+		this.radius = 0;
 		this.isFocus = false;
 
 
@@ -38,14 +39,17 @@ var Particle = (function () {
 
 		self.angle = speedAngle.angle;
 		self.speed = speedAngle.speed / (self.mass + mass);
-		self.mass = self.mass + mass;
+		self.newMass(self.mass + mass);
 	}
 
 	function checkCollision(self) {
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
+			// calculate distance between particles
+			var distance = Math.sqrt(Math.pow(Universe.particles[i].y - self.y, 2) + Math.pow(Universe.particles[i].x - self.x, 2));
+
 			// if the particle is not itself
 			// if the particle is colliding
-			if (Math.sqrt(Math.pow(Universe.particles[i].y - self.y, 2) + Math.pow(Universe.particles[i].x - self.x, 2)) < Math.sqrt(Universe.particles[i].mass + self.mass) && self.mass > Universe.particles[i].mass && Universe.particles[i] !== self) {
+			if (distance < Universe.particles[i].radius + self.radius && self.mass > Universe.particles[i].mass && Universe.particles[i] !== self) {
 				addMomentum(self, Universe.particles[i].speed, Universe.particles[i].mass, Universe.particles[i].angle);
 				Universe.particles[i].destroy();
 
@@ -83,6 +87,11 @@ var Particle = (function () {
 				addVelocity(this, speed, angle);
 			}
 		}
+	};
+
+	Particle.prototype.newMass = function (mass) {
+		this.mass = mass;
+		this.radius = Math.sqrt(mass / Math.PI);
 	};
 
 	Particle.prototype.focus = function () {
