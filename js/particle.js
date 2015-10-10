@@ -36,8 +36,6 @@ var Particle = (function () {
 	function addMomentum(self, speed, mass, angle) {
 		var speedAngle = calcSpeedAngle(speed * mass, angle, self.speed * self.mass, self.angle);
 
-		console.log(self.angle);
-
 		self.angle = speedAngle.angle;
 		self.speed = speedAngle.speed / (self.mass + mass);
 		self.mass = self.mass + mass;
