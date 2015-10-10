@@ -6,7 +6,6 @@ var Particle = (function () {
 		this.speed = 0;
 		this.mass = 1;
 		this.radius = 0;
-		this.isFocus = false;
 
 
 		Universe.particles.push(this);
@@ -80,8 +79,8 @@ var Particle = (function () {
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
 			if (Universe.particles[i] !== this) {
 				var distance = Math.pow(Math.sqrt(Math.pow(Universe.particles[i].x - this.x, 2) + Math.pow(Universe.particles[i].y - this.y, 2)), 2);
-				var force = (this.mass * Universe.particles[i].mass) / distance;
-				var speed = force / this.mass;
+				var gravity = (this.mass * Universe.particles[i].mass) / distance;
+				var speed = gravity / this.mass;
 				var angle = Math.atan2(Universe.particles[i].y - this.y, Universe.particles[i].x - this.x) + (Math.PI / 2);
 
 				addVelocity(this, speed, angle);
@@ -92,14 +91,6 @@ var Particle = (function () {
 	Particle.prototype.newMass = function (mass) {
 		this.mass = mass;
 		this.radius = Math.sqrt(mass / Math.PI);
-	};
-
-	Particle.prototype.focus = function () {
-		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
-			Universe.particles[i].isFocus = false;
-		}
-
-		this.isFocus = true;
 	};
 
 	Particle.prototype.destroy = function () {
