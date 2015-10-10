@@ -33,23 +33,22 @@ var Particle = (function () {
 		self.speed = speedAngle.speed;
 	}
 
-	function addMomentum(self, speed, mass, direction) {
-		var speedAngle = calcSpeedAngle(self.speed * self.mass, self.angle, speed * mass, direction);
+	function addMomentum(self, speed, mass, angle) {
+		var speedAngle = calcSpeedAngle(speed * mass, angle, self.speed * self.mass, self.angle);
+
+		console.log(self.angle);
 
 		self.angle = speedAngle.angle;
 		self.speed = speedAngle.speed / (self.mass + mass);
+		self.mass = self.mass + mass;
 	}
-
-	console.log(calcSpeedAngle(10, 0, 20, Math.PI));
 
 	function checkCollision(self) {
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
 			// if the particle is not itself
 			// if the particle is colliding
 			if (Math.sqrt(Math.pow(Universe.particles[i].y - self.y, 2) + Math.pow(Universe.particles[i].x - self.x, 2)) < Math.sqrt(Universe.particles[i].mass + self.mass) && self.mass > Universe.particles[i].mass && Universe.particles[i] !== self) {
-				self.mass += Universe.particles[i].mass;
-				//addMomentum(this, Universe.particles[i].speed, Universe.particles[i].mass, Universe.particles[i].direction);
-				self.speed = 0;
+				addMomentum(self, Universe.particles[i].speed, Universe.particles[i].mass, Universe.particles[i].angle);
 				Universe.particles[i].destroy();
 
 				// decrement to prevent error
