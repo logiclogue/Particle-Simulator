@@ -1,5 +1,7 @@
 (function () {
 	var seed = "";
+	var startX = 0;
+	var startY = 0;
 
 	function spawnParticles() {
 		// spawn particles
@@ -27,6 +29,16 @@
 
 	Input["myCanvas"].addEventListener("wheel", function (e) {
 		Universe.zoom += e.wheelDeltaY / 10000;
+	});
+
+	Input["myCanvas"].addEventListener("mousedown", function (e) {
+		startX = e.pageX;
+		startY = e.pageY;
+	});
+
+	Input["myCanvas"].addEventListener("mouseup", function (e) {
+		Universe.pos.x -= (startX - e.pageX);
+		Universe.pos.y -= (startY - e.pageY);
 	});
 
 	spawnParticles();
