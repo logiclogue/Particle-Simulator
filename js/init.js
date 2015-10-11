@@ -8,3 +8,7 @@
 
 	Universe.start();
 }());
+
+document.getElementById("btn-run").addEventListener("click", function () {
+	document.getElementById("div-settings").className = "hidden";
+});
