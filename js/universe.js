@@ -2,6 +2,11 @@ var Universe = (function (self) {
 	var interval;
 
 	self.particles = [];
+	self.zoom = 1;
+	self.pos = {
+		x: 0,
+		y: 0
+	};
 
 
 	function mainLoop() {		
@@ -39,7 +44,7 @@ var Universe = (function (self) {
 
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			Main.ctx.beginPath();
-			Main.ctx.arc(self.particles[i].x + Main.pos.x, self.particles[i].y + Main.pos.y, self.particles[i].radius, 0, 2 * Math.PI);
+			Main.ctx.arc((self.particles[i].x + self.pos.x) * self.zoom, (self.particles[i].y + self.pos.y) * self.zoom, (self.particles[i].radius) * self.zoom, 0, 2 * Math.PI);
 			Main.ctx.fill();
 		}
 	};
