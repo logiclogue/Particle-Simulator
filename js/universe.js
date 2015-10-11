@@ -4,14 +4,7 @@ var Universe = (function (self) {
 	self.particles = [];
 
 
-	function mainLoop() {
-		// refresh the screen
-		Main.ctx.globalAlpha = 1;
-		Main.ctx.fillStyle = "#FFFFFF";
-		Main.ctx.fillRect(0, 0, Main.c.width, Main.c.height);
-		Main.ctx.fillStyle = "#000000";
-		Main.ctx.globalAlpha = 1;
-		
+	function mainLoop() {		
 		// draw particles
 		updateParticles();
 	}
@@ -29,13 +22,31 @@ var Universe = (function (self) {
 			}
 		}
 
+		self.draw();
+	}
+
+	function clearScreen() {
+		Main.ctx.globalAlpha = 1;
+		Main.ctx.fillStyle = "#FFFFFF";
+		Main.ctx.fillRect(0, 0, Main.c.width, Main.c.height);
+		Main.ctx.fillStyle = "#000000";
+		Main.ctx.globalAlpha = 1;
+	}
+
+
+	self.draw = function () {
+		clearScreen();
+
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			Main.ctx.beginPath();
 			Main.ctx.arc(self.particles[i].x + Main.pos.x, self.particles[i].y + Main.pos.y, self.particles[i].radius, 0, 2 * Math.PI);
 			Main.ctx.fill();
 		}
-	}
+	};
 
+	self.restart = function () {
+		self.particles = [];
+	};
 
 	self.start = function () {
 		inverval = setInterval(mainLoop, 1000 / 60);
