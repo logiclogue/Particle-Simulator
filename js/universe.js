@@ -2,6 +2,7 @@ var Universe = (function (self) {
 	var interval;
 
 	self.particles = [];
+	self.speed = 1000 / 60;
 	self.zoom = 1;
 	self.pos = {
 		x: 0,
@@ -58,7 +59,7 @@ var Universe = (function (self) {
 	};
 
 	self.start = function () {
-		interval = setInterval(mainLoop, 1000 / 60);
+		interval = setInterval(mainLoop, (1000 / self.speed) || 17);
 	};
 
 

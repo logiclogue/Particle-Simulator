@@ -15,11 +15,12 @@
 		Universe.draw();
 	}
 
-	Input.load(["btn-run", "div-settings", "div-pause", "input-seed", "myCanvas"]);
+	Input.load(["btn-run", "div-settings", "div-pause", "input-seed", "input-speed", "myCanvas"]);
 
 	Input["btn-run"].addEventListener("click", function () {
 		Input["div-settings"].className = "hidden";
 		Input["div-pause"].className = "";
+		Universe.speed = Input["input-speed"].value;
 		Universe.start();
 	});
 
