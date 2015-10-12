@@ -28,16 +28,19 @@
 		spawnParticles();
 	});
 
+	// zoom event with the mouse wheel on the canvas
 	Input["myCanvas"].addEventListener("wheel", function (e) {
 		Universe.zoom += e.wheelDeltaY / 10000;
 	});
 
+	// when mouse down on the canvas, start of moving
 	Input["myCanvas"].addEventListener("mousedown", function (e) {
 		isMoving = true;
 		startX = e.pageX;
 		startY = e.pageY;
 	});
 
+	// when mouse down and moving
 	Input["myCanvas"].addEventListener("mousemove", function (e) {
 		if (isMoving) {
 			Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
@@ -48,6 +51,7 @@
 		startY = e.pageY;
 	});
 
+	// when mouse is no longer down
 	Input["myCanvas"].addEventListener("mouseup", function (e) {
 		isMoving = false;
 	});

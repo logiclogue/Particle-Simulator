@@ -33,7 +33,7 @@ var Universe = (function (self) {
 	function clearScreen() {
 		Main.ctx.globalAlpha = 1;
 		Main.ctx.fillStyle = "#FFFFFF";
-		Main.ctx.fillRect(0, 0, Main.c.width, Main.c.height);
+		Main.ctx.fillRect(0, 0, Main.width, Main.height);
 		Main.ctx.fillStyle = "#000000";
 		Main.ctx.globalAlpha = 1;
 	}
@@ -44,7 +44,7 @@ var Universe = (function (self) {
 
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			Main.ctx.beginPath();
-			Main.ctx.arc((self.particles[i].x + self.pos.x) * self.zoom, (self.particles[i].y + self.pos.y) * self.zoom, (self.particles[i].radius) * self.zoom, 0, 2 * Math.PI);
+			Main.ctx.arc((self.particles[i].x + self.pos.x) * self.zoom + (Main.width / 2), (self.particles[i].y + self.pos.y) * self.zoom + (Main.height / 2), (self.particles[i].radius) * self.zoom, 0, 2 * Math.PI);
 			Main.ctx.fill();
 		}
 	};
