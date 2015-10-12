@@ -37,8 +37,8 @@
 	});
 
 	Input["myCanvas"].addEventListener("mouseup", function (e) {
-		Universe.pos.x -= (startX - e.pageX);
-		Universe.pos.y -= (startY - e.pageY);
+		Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
+		Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
 	});
 
 	spawnParticles();
