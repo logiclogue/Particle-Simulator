@@ -50,6 +50,12 @@
 		startY = e.pageY;
 	});
 
+	Input["myCanvas"].addEventListener("touchstart", function (e) {
+		isMoving = true;
+		startX = e.touches[0].pageX;
+		startY = e.touches[0].pageY;
+	});
+
 	// when mouse down and moving
 	Input["myCanvas"].addEventListener("mousemove", function (e) {
 		if (isMoving) {
@@ -59,6 +65,14 @@
 
 		startX = e.pageX;
 		startY = e.pageY;
+	});
+
+	Input["myCanvas"].addEventListener("touchmove", function (e) {
+		Universe.pos.x -= (startX - e.touches[0].pageX) / Universe.zoom;
+		Universe.pos.y -= (startY - e.touches[0].pageY) / Universe.zoom;
+
+		startX = e.touches[0].pageX;
+		startY = e.touches[0].pageY;
 	});
 
 	// when mouse is no longer down
