@@ -58,6 +58,8 @@
 
 	// when mouse down and moving
 	Input["myCanvas"].addEventListener("mousemove", function (e) {
+		e.preventDefault();
+		
 		if (isMoving) {
 			Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
 			Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
