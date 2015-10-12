@@ -15,11 +15,18 @@
 		Universe.draw();
 	}
 
-	Input.load(["btn-run", "div-settings", "input-seed", "myCanvas"]);
+	Input.load(["btn-run", "div-settings", "div-pause", "input-seed", "myCanvas"]);
 
 	Input["btn-run"].addEventListener("click", function () {
 		Input["div-settings"].className = "hidden";
+		Input["div-pause"].className = "";
 		Universe.start();
+	});
+
+	Input["div-pause"].addEventListener("click", function () {
+		Input["div-pause"].className = "hidden";
+		Input["div-settings"].className = "";
+		Universe.pause();
 	});
 
 	Input["input-seed"].addEventListener("keyup", function () {

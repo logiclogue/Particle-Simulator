@@ -22,6 +22,12 @@ body {
 	text-align: center;
 }
 
+#div-pause {
+	position: absolute;
+	top: 1%;
+	left: 1%;
+}
+
 
 .hidden {
 	display: none;
