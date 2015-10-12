@@ -3,6 +3,7 @@
 	var startX = 0;
 	var startY = 0;
 	var isMoving = false;
+	
 
 	function spawnParticles() {
 		// spawn particles
@@ -14,6 +15,7 @@
 
 		Universe.draw();
 	}
+
 
 	Input.load(["btn-run", "div-settings", "div-pause", "input-seed", "input-speed", "myCanvas"]);
 
