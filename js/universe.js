@@ -53,8 +53,12 @@ var Universe = (function (self) {
 		self.particles = [];
 	};
 
+	self.pause = function () {
+		clearInterval(interval);
+	};
+
 	self.start = function () {
-		inverval = setInterval(mainLoop, 1000 / 60);
+		interval = setInterval(mainLoop, 1000 / 60);
 	};
 
 

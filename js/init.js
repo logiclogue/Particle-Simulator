@@ -56,5 +56,6 @@
 		isMoving = false;
 	});
 
+
 	spawnParticles();
 }());
