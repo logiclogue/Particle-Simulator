@@ -2,6 +2,7 @@
 	var seed = "";
 	var startX = 0;
 	var startY = 0;
+	var isMoving = false;
 
 	function spawnParticles() {
 		// spawn particles
@@ -32,13 +33,23 @@
 	});
 
 	Input["myCanvas"].addEventListener("mousedown", function (e) {
+		isMoving = true;
+		startX = e.pageX;
+		startY = e.pageY;
+	});
+
+	Input["myCanvas"].addEventListener("mousemove", function (e) {
+		if (isMoving) {
+			Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
+			Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
+		}
+
 		startX = e.pageX;
 		startY = e.pageY;
 	});
 
 	Input["myCanvas"].addEventListener("mouseup", function (e) {
-		Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
-		Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
+		isMoving = false;
 	});
 
 	spawnParticles();
