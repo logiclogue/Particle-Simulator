@@ -7,7 +7,7 @@
 	function spawnParticles() {
 		// spawn particles
 		for (var i = 0; i < 100; i += 1) {
-			var theParticle = new Particle(5000 * Md5.rand(seed + i + "x"), 5000 * Md5.rand(seed + i + "y"));
+			var theParticle = new Particle(5000 * Md5.rand(seed + i + "x") - 2500, 5000 * Md5.rand(seed + i + "y") - 2500);
 
 			theParticle.newMass(1 * Md5.rand(seed + "_" + i) + 50);
 		}
