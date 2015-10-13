@@ -2,6 +2,7 @@
 	var seed = "";
 	var startX = 0;
 	var startY = 0;
+	var startD = 0;
 	var isMoving = false;
 	
 
@@ -51,15 +52,20 @@
 	});
 
 	Input["myCanvas"].addEventListener("touchstart", function (e) {
-		isMoving = true;
-		startX = e.touches[0].pageX;
-		startY = e.touches[0].pageY;
+		e.preventDefault();
+
+		if (e.touches.length === 1) {
+			isMoving = true;
+			startX = e.touches[0].pageX;
+			startY = e.touches[0].pageY;
+		}
+		else {
+			startD = Math.sqrt(Math.pow(e.touches[0].pageX - e.touches[1].pageX, 2) + Math.pow(e.touches[0].pageY - e.touches[1].pageY, 2));
+		}
 	});
 
 	// when mouse down and moving
 	Input["myCanvas"].addEventListener("mousemove", function (e) {
-		e.preventDefault();
-		
 		if (isMoving) {
 			Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
 			Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
@@ -70,11 +76,21 @@
 	});
 
 	Input["myCanvas"].addEventListener("touchmove", function (e) {
-		Universe.pos.x -= (startX - e.touches[0].pageX) / Universe.zoom;
-		Universe.pos.y -= (startY - e.touches[0].pageY) / Universe.zoom;
+		e.preventDefault();
 
-		startX = e.touches[0].pageX;
-		startY = e.touches[0].pageY;
+		if (e.touches.length === 1) {
+			Universe.pos.x -= (startX - e.touches[0].pageX) / Universe.zoom;
+			Universe.pos.y -= (startY - e.touches[0].pageY) / Universe.zoom;
+
+			startX = e.touches[0].pageX;
+			startY = e.touches[0].pageY;
+		}
+		else {
+			var distance = Math.sqrt(Math.pow(e.touches[0].pageX - e.touches[1].pageX, 2) + Math.pow(e.touches[0].pageY - e.touches[1].pageY, 2));
+			startD -= distance;
+			Universe.zoom -= startD / 1000;
+			startD = distance;
+		}
 	});
 
 	// when mouse is no longer down

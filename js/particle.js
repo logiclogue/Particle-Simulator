@@ -78,9 +78,9 @@ var Particle = (function () {
 		// gravity
 		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
 			if (Universe.particles[i] !== this) {
-				var distance = Math.pow(Math.sqrt(Math.pow(Universe.particles[i].x - this.x, 2) + Math.pow(Universe.particles[i].y - this.y, 2)), 2);
-				var gravity = (this.mass * Universe.particles[i].mass) / distance;
-				var speed = gravity / this.mass;
+				var distance = Math.sqrt(Math.pow(Universe.particles[i].x - this.x, 2) + Math.pow(Universe.particles[i].y - this.y, 2));
+				var force = (this.mass * Universe.particles[i].mass) / Math.pow(distance, 2);
+				var speed = force / this.mass;
 				var angle = Math.atan2(Universe.particles[i].y - this.y, Universe.particles[i].x - this.x) + (Math.PI / 2);
 
 				addVelocity(this, speed, angle);
