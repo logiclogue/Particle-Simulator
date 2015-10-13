@@ -60,7 +60,7 @@
 			startY = e.touches[0].pageY;
 		}
 		else {
-			startD = Math.sqrt(Math.pow(e.touches[0].pageX - e.touches[1].pageX, 2) + Math.pow(e.touches[0].pageY - e.touches[1].pageY, 2));
+			startD = Util.distance(e.touches[0].pageX, e.touches[1].pageX, e.touches[0].pageY, e.touches[1].pageY);
 		}
 	});
 
@@ -86,7 +86,7 @@
 			startY = e.touches[0].pageY;
 		}
 		else {
-			var distance = Math.sqrt(Math.pow(e.touches[0].pageX - e.touches[1].pageX, 2) + Math.pow(e.touches[0].pageY - e.touches[1].pageY, 2));
+			var distance = Util.distance(e.touches[0].pageX, e.touches[1].pageX, e.touches[0].pageY, e.touches[1].pageY);
 			startD -= distance;
 			Universe.zoom -= startD / 1000;
 			startD = distance;
