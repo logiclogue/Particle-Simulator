@@ -45,7 +45,7 @@ var Universe = (function (self) {
 
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			Main.ctx.beginPath();
-			Main.ctx.arc((self.particles[i].x + self.pos.x) * self.zoom + (Main.width / 2), (self.particles[i].y + self.pos.y) * self.zoom + (Main.height / 2), (self.particles[i].radius) * self.zoom, 0, 2 * Math.PI);
+			Main.ctx.arc((self.particles[i].x + self.pos.x) * Math.pow(2, self.zoom) + (Main.width / 2), (self.particles[i].y + self.pos.y) * Math.pow(2, self.zoom) + (Main.height / 2), (self.particles[i].radius) * Math.pow(2, self.zoom), 0, 2 * Math.PI);
 			Main.ctx.fill();
 		}
 	};

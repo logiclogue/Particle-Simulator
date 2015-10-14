@@ -41,7 +41,7 @@
 
 	// zoom event with the mouse wheel on the canvas
 	Input["myCanvas"].addEventListener("wheel", function (e) {
-		Universe.zoom += e.wheelDeltaY / 10000;
+		Universe.zoom += e.wheelDeltaY / 1000;
 	});
 
 	// when mouse down on the canvas, start of moving
@@ -67,8 +67,8 @@
 	// when mouse down and moving
 	Input["myCanvas"].addEventListener("mousemove", function (e) {
 		if (isMoving) {
-			Universe.pos.x -= (startX - e.pageX) / Universe.zoom;
-			Universe.pos.y -= (startY - e.pageY) / Universe.zoom;
+			Universe.pos.x -= (startX - e.pageX) / Math.pow(2, Universe.zoom);
+			Universe.pos.y -= (startY - e.pageY) / Math.pow(2, Universe.zoom);
 		}
 
 		startX = e.pageX;
@@ -79,8 +79,8 @@
 		e.preventDefault();
 
 		if (e.touches.length === 1) {
-			Universe.pos.x -= (startX - e.touches[0].pageX) / Universe.zoom;
-			Universe.pos.y -= (startY - e.touches[0].pageY) / Universe.zoom;
+			Universe.pos.x -= (startX - e.touches[0].pageX) / Math.pow(2, Universe.zoom);
+			Universe.pos.y -= (startY - e.touches[0].pageY) / Math.pow(2, Universe.zoom);
 
 			startX = e.touches[0].pageX;
 			startY = e.touches[0].pageY;
