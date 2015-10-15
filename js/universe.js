@@ -2,7 +2,7 @@ var Universe = (function (self) {
 	var interval;
 
 	self.particles = [];
-	self.speed = 1000 / 60;
+	self.speed = 60;
 	self.zoom = 1;
 	self.pos = {
 		x: 0,
@@ -48,6 +48,10 @@ var Universe = (function (self) {
 			Main.ctx.arc((self.particles[i].x + self.pos.x) * Math.pow(2, self.zoom) + (Main.width / 2), (self.particles[i].y + self.pos.y) * Math.pow(2, self.zoom) + (Main.height / 2), (self.particles[i].radius) * Math.pow(2, self.zoom), 0, 2 * Math.PI);
 			Main.ctx.fill();
 		}
+	};
+
+	self.setZoom = function (value) {
+		self.zoom = Math.pow(2, self.zoom);
 	};
 
 	self.restart = function () {
