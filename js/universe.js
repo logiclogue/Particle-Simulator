@@ -32,11 +32,11 @@ var Universe = (function (self) {
 	}
 
 	function clearScreen() {
-		Main.ctx.globalAlpha = 1;
-		Main.ctx.fillStyle = "#FFFFFF";
-		Main.ctx.fillRect(0, 0, Main.width, Main.height);
-		Main.ctx.fillStyle = "#000000";
-		Main.ctx.globalAlpha = 1;
+		Canvas.ctx.globalAlpha = 1;
+		Canvas.ctx.fillStyle = "#FFFFFF";
+		Canvas.ctx.fillRect(0, 0, Canvas.width, Canvas.height);
+		Canvas.ctx.fillStyle = "#000000";
+		Canvas.ctx.globalAlpha = 1;
 	}
 
 
@@ -44,9 +44,9 @@ var Universe = (function (self) {
 		clearScreen();
 
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
-			Main.ctx.beginPath();
-			Main.ctx.arc((self.particles[i].x + self.pos.x) * Math.pow(2, self.zoom) + (Main.width / 2), (self.particles[i].y + self.pos.y) * Math.pow(2, self.zoom) + (Main.height / 2), (self.particles[i].radius) * Math.pow(2, self.zoom), 0, 2 * Math.PI);
-			Main.ctx.fill();
+			Canvas.ctx.beginPath();
+			Canvas.ctx.arc((self.particles[i].x + self.pos.x) * Math.pow(2, self.zoom) + (Canvas.width / 2), (self.particles[i].y + self.pos.y) * Math.pow(2, self.zoom) + (Canvas.height / 2), (self.particles[i].radius) * Math.pow(2, self.zoom), 0, 2 * Math.PI);
+			Canvas.ctx.fill();
 		}
 	};
 
