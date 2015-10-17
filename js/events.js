@@ -11,7 +11,7 @@ var Events = (function (self) {
 		Input["btn-run"].addEventListener("click", function () {
 			Input["div-settings"].className = "hidden";
 			Input["div-pause"].className = "";
-			Universe.speed = Input["input-speed"].value;
+			AnimLoop.setSpeed(Input["input-speed"].value);
 			Universe.start();
 		});
 

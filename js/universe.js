@@ -2,18 +2,12 @@ var Universe = (function (self) {
 	var interval;
 
 	self.particles = [];
-	self.speed = 60;
 	self.zoom = 1;
 	self.pos = {
 		x: 0,
 		y: 0
 	};
 
-
-	function mainLoop() {		
-		// draw particles
-		updateParticles();
-	}
 
 	function updateParticles() {
 		// update all particles and draw them
@@ -27,8 +21,6 @@ var Universe = (function (self) {
 				max -= 1;
 			}
 		}
-
-		self.draw();
 	}
 
 	function clearScreen() {
@@ -59,11 +51,13 @@ var Universe = (function (self) {
 	};
 
 	self.pause = function () {
-		clearInterval(interval);
+		AnimLoop.updateFunction = function () {};
 	};
 
 	self.start = function () {
-		interval = setInterval(mainLoop, (1000 / self.speed) || 17);
+		AnimLoop.updateFunction = updateParticles;
+		AnimLoop.drawFunction = self.draw;
+		AnimLoop.start();
 	};
 
 
