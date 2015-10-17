@@ -5,19 +5,27 @@ var Events = (function (self) {
 	var isMoving = false;
 
 
+	self.hideElement = function (element) {
+		Input[element].className = "hidden";
+	}
+
+	self.showElement = function (element) {
+		Input[element].className = "";
+	}
+
 	self.init = function () {
-		Input.load(["btn-run", "div-settings", "div-pause", "input-seed", "input-speed", "myCanvas"]);
+		Input.load(["btn-run", "btn-add", "div-settings", "div-pause", "input-seed", "input-speed", "myCanvas"]);
 
 		Input["btn-run"].addEventListener("click", function () {
-			Input["div-settings"].className = "hidden";
-			Input["div-pause"].className = "";
+			self.hideElement("div-settings");
+			self.showElement("div-pause");
 			AnimLoop.setSpeed(Input["input-speed"].value);
 			Universe.start();
 		});
 
 		Input["div-pause"].addEventListener("click", function () {
-			Input["div-pause"].className = "hidden";
-			Input["div-settings"].className = "";
+			self.hideElement("div-pause");
+			self.showElement("div-settings");
 			Universe.pause();
 		});
 
@@ -86,6 +94,8 @@ var Events = (function (self) {
 		Input["myCanvas"].addEventListener("mouseup", function (e) {
 			isMoving = false;
 		});
+
+		Add.init();
 	};
 
 

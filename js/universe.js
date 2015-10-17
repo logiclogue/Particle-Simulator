@@ -9,7 +9,7 @@ var Universe = (function (self) {
 	};
 
 
-	function updateParticles() {
+	self.update = function () {
 		// update all particles and draw them
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
 			if (self.particles[i] !== undefined) {
@@ -32,13 +32,25 @@ var Universe = (function (self) {
 	}
 
 
+	self.drawParticle = function (x, y, radius, colour) {
+		colour = colour || "#000000";
+		Canvas.ctx.fillStyle = colour;
+		Canvas.ctx.beginPath();
+		Canvas.ctx.arc(
+			(x + self.pos.x) * Math.pow(2, self.zoom) + (Canvas.width / 2),
+			(y + self.pos.y) * Math.pow(2, self.zoom) + (Canvas.height / 2),
+			radius * Math.pow(2, self.zoom),
+			0,
+			2 * Math.PI
+		);
+		Canvas.ctx.fill();
+	};
+
 	self.draw = function () {
 		clearScreen();
 
 		for (var i = 0, max = self.particles.length; i < max; i += 1) {
-			Canvas.ctx.beginPath();
-			Canvas.ctx.arc((self.particles[i].x + self.pos.x) * Math.pow(2, self.zoom) + (Canvas.width / 2), (self.particles[i].y + self.pos.y) * Math.pow(2, self.zoom) + (Canvas.height / 2), (self.particles[i].radius) * Math.pow(2, self.zoom), 0, 2 * Math.PI);
-			Canvas.ctx.fill();
+			self.drawParticle(self.particles[i].x, self.particles[i].y, self.particles[i].radius);
 		}
 	};
 
@@ -55,7 +67,7 @@ var Universe = (function (self) {
 	};
 
 	self.start = function () {
-		AnimLoop.updateFunction = updateParticles;
+		AnimLoop.updateFunction = self.update;
 		AnimLoop.drawFunction = self.draw;
 		AnimLoop.start();
 	};

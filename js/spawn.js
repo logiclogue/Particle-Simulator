@@ -9,7 +9,8 @@ var Spawn = (function (self) {
 			theParticle.newMass(1 * Md5.rand(self.seed + "_" + i) + 50);
 		}
 
-		Universe.draw();
+		Universe.start();
+		Universe.pause();
 	};
 
 	return self;
