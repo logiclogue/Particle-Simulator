@@ -64,8 +64,6 @@ var AnimLoop = (function (self) {
 		else {
 			setTimeout(loop, 1);
 		}
-
-		console.log(timestamp / self.cycles);
 	};
 
 
