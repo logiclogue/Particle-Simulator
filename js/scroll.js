@@ -5,6 +5,7 @@ var Scroll = (function (self) {
 		isMoving = false;
 
 
+	// mouse controls
 	function zoom(e) {
 		Universe.zoom += e.wheelDeltaY / 1000;
 	}
@@ -29,6 +30,7 @@ var Scroll = (function (self) {
 		isMoving = false;
 	}
 
+	// touch controls
 	function touchstart(e) {
 		e.preventDefault();
 

@@ -54,10 +54,6 @@ var Universe = (function (self) {
 		}
 	};
 
-	self.setZoom = function (value) {
-		self.zoom = Math.pow(2, self.zoom);
-	};
-
 	self.restart = function () {
 		self.particles = [];
 	};

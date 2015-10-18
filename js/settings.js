@@ -23,6 +23,7 @@ var Settings = (function (self) {
 	self.init = function () {
 		Input["btn-run"].addEventListener("click", runButton);
 		Input["btn-pause"].addEventListener("click", pauseButton);
+		Input["btn-add"].addEventListener("click", Add.init);
 		Input["input-seed"].addEventListener("keyup", seedChange);
 	};
 
