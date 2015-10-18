@@ -14,17 +14,17 @@ var Events = (function (self) {
 	}
 
 	self.init = function () {
-		Input.load(["btn-run", "btn-add", "div-settings", "div-pause", "input-seed", "input-speed", "myCanvas"]);
+		Input.load(["btn-run", "btn-add", "div-settings", "btn-pause", "input-seed", "input-speed", "myCanvas"]);
 
 		Input["btn-run"].addEventListener("click", function () {
 			self.hideElement("div-settings");
-			self.showElement("div-pause");
+			self.showElement("btn-pause");
 			AnimLoop.setSpeed(Input["input-speed"].value);
 			Universe.start();
 		});
 
-		Input["div-pause"].addEventListener("click", function () {
-			self.hideElement("div-pause");
+		Input["btn-pause"].addEventListener("click", function () {
+			self.hideElement("btn-pause");
 			self.showElement("div-settings");
 			Universe.pause();
 		});
