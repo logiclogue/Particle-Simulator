@@ -1,30 +1,40 @@
 var Add = (function (self) {
 
-	var addParticle = function (e) {
+	function addParticle(e) {
 		var coord = Util.posToCoord(e.pageX, e.pageY);
 		var newParticle = new Particle(coord.x, coord.y);
 
 		newParticle.newMass(100);
 	};
 
-	var highlightParticle = function (e) {
+	function  highlightParticle(e) {
 		var coord = Util.posToCoord(e.pageX, e.pageY);
 
 		Universe.draw();
 		Universe.drawParticle(coord.x, coord.y, 10, "#0000FF");
 	};
 
-	var leave = function (e) {
+	function leave(e) {
 		Input["btn-pause"].removeEventListener("click", leave);
 		Input["myCanvas"].removeEventListener("click", addParticle);
 		Input["myCanvas"].removeEventListener("mousemove", highlightParticle);
+
+		// resume scrolling
+		Scroll.init();
+
+		// resume drawing
+		AnimLoop.drawFunction = Universe.draw;
 	};
 
-	var clicked = function () {
+	function clicked() {
+		// stop scrolling;
+		Scroll.stop();
+
+		// stop drawing
+		AnimLoop.drawFunction = function () {};
+
 		Events.hideElement("div-settings");
 		Events.showElement("btn-pause");
-
-		AnimLoop.drawFunction = function () {};
 
 		Input["myCanvas"].addEventListener("click", addParticle);
 		Input["myCanvas"].addEventListener("mousemove", highlightParticle);
