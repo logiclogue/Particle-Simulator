@@ -1,15 +1,15 @@
 var Settings = (function (self) {
 
 	function runButton() {
-		Events.hideElement("div-settings");
-		Events.showElement("btn-pause");
+		Input.hideElement("div-settings");
+		Input.showElement("btn-pause");
 		AnimLoop.setSpeed(Input["input-speed"].value);
 		Universe.start();
 	}
 
 	function pauseButton() {
-		Events.hideElement("btn-pause");
-		Events.showElement("div-settings");
+		Input.hideElement("btn-pause");
+		Input.showElement("div-settings");
 		Universe.pause();
 	}
 

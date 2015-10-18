@@ -1,4 +1,4 @@
 (function () {
 	Spawn.particles();
-	Events.init();
+	Input.init();
 }());

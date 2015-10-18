@@ -33,8 +33,8 @@ var Add = (function (self) {
 		// stop drawing
 		AnimLoop.drawFunction = function () {};
 
-		Events.hideElement("div-settings");
-		Events.showElement("btn-pause");
+		Input.hideElement("div-settings");
+		Input.showElement("btn-pause");
 
 		Input["myCanvas"].addEventListener("click", addParticle);
 		Input["myCanvas"].addEventListener("mousemove", highlightParticle);
