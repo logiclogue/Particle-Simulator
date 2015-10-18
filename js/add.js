@@ -1,10 +1,9 @@
 var Add = (function (self) {
 
 	var addParticle = function (e) {
-		var newParticle = new Particle(
-			(e.pageX - Canvas.width / 2) / Math.pow(2, Universe.zoom) - Universe.pos.x,
-			(e.pageY - Canvas.height / 2) / Math.pow(2, Universe.zoom) - Universe.pos.y
-		);
+		var coord = Util.posToCoord(e.pageX, e.pageY);
+		var newParticle = new Particle(coord.x, coord.y);
+		
 		newParticle.newMass(100);
 
 		Input["myCanvas"].removeEventListener("click", addParticle);
@@ -12,14 +11,10 @@ var Add = (function (self) {
 	};
 
 	var highlightParticle = function (e) {
+		var coord = Util.posToCoord(e.pageX, e.pageY);
+
 		Universe.draw();
-		Universe.drawParticle(
-			(e.pageX - Canvas.width / 2) / Math.pow(2, Universe.zoom) - Universe.pos.x,
-			(e.pageY - Canvas.height / 2) / Math.pow(2, Universe.zoom) - Universe.pos.y,
-			10,
-			"#0000FF"
-		);
-		console.log(Universe.pos.x);
+		Universe.drawParticle(coord.x, coord.y, 10, "#0000FF");
 	};
 
 	var clicked = function () {

@@ -14,6 +14,13 @@ var Util = (function () {
 		return Math.sqrt(Math.pow(x_0 - x_1, 2) + Math.pow(y_0 - y_1, 2));
 	}
 
+	self.posToCoord = function (pageX, pageY) {
+		return {
+			x: (pageX - Canvas.width / 2) / Math.pow(2, Universe.zoom) - Universe.pos.x,
+			y: (pageY - Canvas.height / 2) / Math.pow(2, Universe.zoom) - Universe.pos.y
+		};
+	}
+
 
 	return self;
 }());
