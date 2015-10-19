@@ -1,12 +1,26 @@
 var Add = (function (self) {
 	var radius = 2,
-		coord;
+		coord,
+		isDown = false,
+		startX = 0,
+		startY = 0;
 
 	function addParticle(e) {
-		var coord = Util.posToCoord(e.pageX, e.pageY);
-		var newParticle = new Particle(coord.x, coord.y);
+		coord = Util.posToCoord(e.pageX, e.pageY);
+		startCoord = Util.posToCoord(startX, startY);
+		isDown = false;
 
+		var newParticle = new Particle(coord.x, coord.y)
 		newParticle.newMass(Math.PI * Math.pow(Math.pow(2, radius), 2));
+		newParticle.speed = Util.distance(coord.x, startCoord.x, coord.y, startCoord.y) / 10;
+		newParticle.angle = Math.atan2(startCoord.y - coord.y, startCoord.x - coord.x) + (Math.PI / 2);
+		console.log(Util.radToDeg(newParticle.angle));
+	}
+
+	function initPos(e) {
+		isDown = true;
+		startX = e.pageX;
+		startY = e.pageY;
 	}
 
 	function drawParticle() {
@@ -14,10 +28,21 @@ var Add = (function (self) {
 		Universe.drawParticle(coord.x, coord.y, Math.pow(2, radius), "#0000FF");
 	}
 
+	function drawLine(endX, endY) {
+		Canvas.ctx.beginPath();
+		Canvas.ctx.moveTo(startX, startY);
+		Canvas.ctx.lineTo(endX, endY);
+		Canvas.ctx.stroke();
+	}
+
 	function highlightParticle(e) {
 		coord = Util.posToCoord(e.pageX, e.pageY);
 		
 		drawParticle();
+
+		if (isDown) {
+			drawLine(e.pageX, e.pageY);
+		}
 	}
 
 	function resizeMass(e) {
@@ -28,7 +53,8 @@ var Add = (function (self) {
 
 	function leave(e) {
 		Input["btn-pause"].removeEventListener("click", leave);
-		Input["myCanvas"].removeEventListener("click", addParticle);
+		Input["myCanvas"].removeEventListener("mousedown", initPos);
+		Input["myCanvas"].removeEventListener("mouseup", addParticle);
 		Input["myCanvas"].removeEventListener("mousemove", highlightParticle);
 		Input["myCanvas"].removeEventListener("wheel", resizeMass);
 
@@ -51,7 +77,8 @@ var Add = (function (self) {
 		Input.showElement("btn-pause");
 
 		// events
-		Input["myCanvas"].addEventListener("click", addParticle);
+		Input["myCanvas"].addEventListener("mousedown", initPos);
+		Input["myCanvas"].addEventListener("mouseup", addParticle);
 		Input["myCanvas"].addEventListener("mousemove", highlightParticle);
 		Input["myCanvas"].addEventListener("wheel", resizeMass);
 		Input["btn-pause"].addEventListener("click", leave);
