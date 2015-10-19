@@ -14,7 +14,6 @@ var Add = (function (self) {
 		newParticle.newMass(Math.PI * Math.pow(Math.pow(2, radius), 2));
 		newParticle.speed = Util.distance(coord.x, startCoord.x, coord.y, startCoord.y) / 10;
 		newParticle.angle = Math.atan2(startCoord.y - coord.y, startCoord.x - coord.x) + (Math.PI / 2);
-		console.log(Util.radToDeg(newParticle.angle));
 	}
 
 	function initPos(e) {
