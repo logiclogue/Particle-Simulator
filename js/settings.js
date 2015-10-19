@@ -13,6 +13,10 @@ var Settings = (function (self) {
 		Universe.pause();
 	}
 
+	function clearButton() {
+		Universe.restart();
+	}
+
 	function seedChange() {
 		Spawn.seed = Input["input-seed"].value;
 		Universe.restart();
@@ -24,6 +28,7 @@ var Settings = (function (self) {
 		Input["btn-run"].addEventListener("click", runButton);
 		Input["btn-pause"].addEventListener("click", pauseButton);
 		Input["btn-add"].addEventListener("click", Add.init);
+		Input["btn-clear"].addEventListener("click", clearButton);
 		Input["input-seed"].addEventListener("keyup", seedChange);
 	};
 

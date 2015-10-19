@@ -20,7 +20,7 @@ var Input = (function (self) {
 	};
 
 	self.init = function () {
-		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "input-seed", "input-speed", "myCanvas"]);
+		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "btn-clear", "input-seed", "input-speed", "myCanvas"]);
 
 		Scroll.init();
 		Settings.init();
