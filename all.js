@@ -184,6 +184,10 @@ var Canvas = (function (self) {
 
 	return self;
 }({}));
+window.addEventListener("load", function () {
+	Spawn.particles();
+	Input.init();
+});
 var Input = (function (self) {
 	
 	function getElement(el_id) {
@@ -591,9 +595,4 @@ var Util = (function () {
 
 
 	return self;
-}());
-
-(function () {
-	Spawn.particles();
-	Input.init();
 }());
