@@ -4,6 +4,7 @@ var Add = (function (self) {
 		isDown = false,
 		startX = 0,
 		startY = 0;
+		
 
 	function addParticle(e) {
 		coord = Util.posToCoord(e.pageX, e.pageY);

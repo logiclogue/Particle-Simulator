@@ -4,6 +4,7 @@ var Add = (function (self) {
 		isDown = false,
 		startX = 0,
 		startY = 0;
+		
 
 	function addParticle(e) {
 		coord = Util.posToCoord(e.pageX, e.pageY);
@@ -509,17 +510,9 @@ var Universe = (function (self) {
 
 
 	self.update = function () {
-		// update all particles and draw them
-		for (var i = 0, max = self.particles.length; i < max; i += 1) {
-			if (self.particles[i] !== undefined) {
-				self.particles[i].update();
-			}
-			// may remove later!
-			else {
-				i -= 1;
-				max -= 1;
-			}
-		}
+		self.particles.forEach(function (particle) {
+			particle.update();
+		});
 	}
 
 	function clearScreen() {
@@ -548,9 +541,9 @@ var Universe = (function (self) {
 	self.draw = function () {
 		clearScreen();
 
-		for (var i = 0, max = self.particles.length; i < max; i += 1) {
-			self.drawParticle(self.particles[i].x, self.particles[i].y, self.particles[i].radius);
-		}
+		self.particles.forEach(function (particle) {
+			self.drawParticle(particle.x, particle.y, particle.radius);
+		});
 	};
 
 	self.restart = function () {
