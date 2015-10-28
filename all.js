@@ -211,7 +211,7 @@ var Input = (function (self) {
 	};
 
 	self.init = function () {
-		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "btn-clear", "input-seed", "input-speed", "myCanvas"]);
+		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "btn-clear", "btn-reset", "input-seed", "input-speed", "myCanvas"]);
 
 		Scroll.init();
 		Settings.init();
@@ -474,6 +474,7 @@ var Settings = (function (self) {
 		Input["btn-pause"].addEventListener("click", pauseButton);
 		Input["btn-add"].addEventListener("click", Add.init);
 		Input["btn-clear"].addEventListener("click", clearButton);
+		Input["btn-reset"].addEventListener("click", seedChange);
 		Input["input-seed"].addEventListener("keyup", seedChange);
 	};
 
