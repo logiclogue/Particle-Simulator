@@ -4,14 +4,14 @@ var Add = (function (self) {
 		isDown = false,
 		startX = 0,
 		startY = 0;
-		
+
 
 	function addParticle(e) {
 		coord = Util.posToCoord(e.pageX, e.pageY);
 		startCoord = Util.posToCoord(startX, startY);
 		isDown = false;
 
-		var newParticle = new Particle(coord.x, coord.y)
+		var newParticle = new Particle(coord.x, coord.y);
 		newParticle.newMass(Math.PI * Math.pow(Math.pow(2, radius), 2));
 		newParticle.speed = Util.distance(coord.x, startCoord.x, coord.y, startCoord.y) / 10;
 		newParticle.angle = Math.atan2(startCoord.y - coord.y, startCoord.x - coord.x) + (Math.PI / 2);
