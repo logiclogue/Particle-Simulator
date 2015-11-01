@@ -4,14 +4,14 @@ var Add = (function (self) {
 		isDown = false,
 		startX = 0,
 		startY = 0;
-		
+
 
 	function addParticle(e) {
 		coord = Util.posToCoord(e.pageX, e.pageY);
 		startCoord = Util.posToCoord(startX, startY);
 		isDown = false;
 
-		var newParticle = new Particle(coord.x, coord.y)
+		var newParticle = new Particle(coord.x, coord.y);
 		newParticle.newMass(Math.PI * Math.pow(Math.pow(2, radius), 2));
 		newParticle.speed = Util.distance(coord.x, startCoord.x, coord.y, startCoord.y) / 10;
 		newParticle.angle = Math.atan2(startCoord.y - coord.y, startCoord.x - coord.x) + (Math.PI / 2);
@@ -281,54 +281,52 @@ var Particle = (function () {
 		};
 	}
 
-	function addVelocity(self, speed, direction) {
-		var speedAngle = calcSpeedAngle(self.speed, self.angle, speed, direction);
+	function addVelocity(speed, direction) {
+		var speedAngle = calcSpeedAngle(this.speed, this.angle, speed, direction);
 
-		self.angle = speedAngle.angle;
-		self.speed = speedAngle.speed;
+		this.angle = speedAngle.angle;
+		this.speed = speedAngle.speed;
 	}
 
-	function addMomentum(self, speed, mass, angle) {
-		var speedAngle = calcSpeedAngle(speed * mass, angle, self.speed * self.mass, self.angle);
+	function addMomentum(speed, mass, angle) {
+		var speedAngle = calcSpeedAngle(speed * mass, angle, this.speed * this.mass, this.angle);
 
-		self.angle = speedAngle.angle;
-		self.speed = speedAngle.speed / (self.mass + mass);
-		self.newMass(self.mass + mass);
+		this.angle = speedAngle.angle;
+		this.speed = speedAngle.speed / (this.mass + mass);
+		this.newMass(this.mass + mass);
 	}
 
-	function checkCollision(self) {
-		for (var i = 0, max = Universe.particles.length; i < max; i += 1) {
+	function checkCollision() {
+		var self = this;
+		Universe.particles.forEach(function (particle) {
 			// calculate distance between particles
-			var distance = Math.sqrt(Math.pow(Universe.particles[i].y - self.y, 2) + Math.pow(Universe.particles[i].x - self.x, 2));
+			var distance = Math.sqrt(Math.pow(particle.y - self.y, 2) + Math.pow(particle.x - self.x, 2));
 
 			// if the particle is not itself
 			// if the particle is colliding
-			if (distance < Universe.particles[i].radius + self.radius && self.mass > Universe.particles[i].mass && Universe.particles[i] !== self) {
-				addMomentum(self, Universe.particles[i].speed, Universe.particles[i].mass, Universe.particles[i].angle);
-				Universe.particles[i].destroy();
-
-				// decrement to prevent error
-				i -= 1;
-				max -= 1;
+			if (distance < particle.radius + self.radius && self.mass >= particle.mass && particle !== self) {
+				addMomentum.call(self, particle.speed, particle.mass, particle.angle);
+				particle.destroy();
 			}
-		}
+		});
 	}
 
-	function updatePos(self) {
-		self.x += Math.sin(self.angle) * self.speed;
-		self.y += -Math.cos(self.angle) * self.speed;
+	function updatePos() {
+		this.x += Math.sin(this.angle) * this.speed;
+		this.y += -Math.cos(this.angle) * this.speed;
 
 		// move camera if is the focus
-		if (self.isFocus) {
-			pos.x = self.x;
-			pos.y = self.y;
+		if (this.isFocus) {
+			pos.x = this.x;
+			pos.y = this.y;
 		}
 	}
 	
 
 	Particle.prototype.update = function () {
-		updatePos(this);
-		checkCollision(this);
+		updatePos.call(this);
+		checkCollision.call(this);
+
 
 		// gravity
 		var self = this;
@@ -339,7 +337,7 @@ var Particle = (function () {
 				var speed = force / self.mass;
 				var angle = Math.atan2(particle.y - self.y, particle.x - self.x) + (Math.PI / 2);
 
-				addVelocity(self, speed, angle);
+				addVelocity.call(self, speed, angle);
 			}
 		});
 	};
