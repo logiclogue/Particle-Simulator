@@ -25,7 +25,7 @@ var Add = (function (self) {
 
 	function drawParticle() {
 		Universe.draw();
-		Universe.drawParticle(coord.x, coord.y, Math.pow(2, radius), "#0000FF");
+		Universe.drawParticle(coord.x, coord.y, Math.pow(2, radius), '#0000FF');
 	}
 
 	function drawLine(endX, endY) {
@@ -52,11 +52,11 @@ var Add = (function (self) {
 	}
 
 	function leave(e) {
-		Input["btn-pause"].removeEventListener("click", leave);
-		Input["myCanvas"].removeEventListener("mousedown", initPos);
-		Input["myCanvas"].removeEventListener("mouseup", addParticle);
-		Input["myCanvas"].removeEventListener("mousemove", highlightParticle);
-		Input["myCanvas"].removeEventListener("wheel", resizeMass);
+		Input['btn-pause'].removeEventListener('click', leave);
+		Input['myCanvas'].removeEventListener('mousedown', initPos);
+		Input['myCanvas'].removeEventListener('mouseup', addParticle);
+		Input['myCanvas'].removeEventListener('mousemove', highlightParticle);
+		Input['myCanvas'].removeEventListener('wheel', resizeMass);
 
 		// resume scrolling
 		Scroll.init();
@@ -73,15 +73,15 @@ var Add = (function (self) {
 		// stop drawing
 		AnimLoop.drawFunction = function () {};
 
-		Input.hideElement("div-settings");
-		Input.showElement("btn-pause");
+		Input.hideElement('div-settings');
+		Input.showElement('btn-pause');
 
 		// events
-		Input["myCanvas"].addEventListener("mousedown", initPos);
-		Input["myCanvas"].addEventListener("mouseup", addParticle);
-		Input["myCanvas"].addEventListener("mousemove", highlightParticle);
-		Input["myCanvas"].addEventListener("wheel", resizeMass);
-		Input["btn-pause"].addEventListener("click", leave);
+		Input['myCanvas'].addEventListener('mousedown', initPos);
+		Input['myCanvas'].addEventListener('mouseup', addParticle);
+		Input['myCanvas'].addEventListener('mousemove', highlightParticle);
+		Input['myCanvas'].addEventListener('wheel', resizeMass);
+		Input['btn-pause'].addEventListener('click', leave);
 	};
 
 

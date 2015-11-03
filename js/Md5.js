@@ -22,7 +22,7 @@ var Md5 = (function (self) {
 
 	
 	self.rand = function (n) {
-		return parseInt(CryptoJS.MD5(n + ""), 16) / parseInt("ffffffffffffffffffffffffffffffff", 16);
+		return parseInt(CryptoJS.MD5(n + ''), 16) / parseInt('ffffffffffffffffffffffffffffffff', 16);
 	};
 
 	self.hash = function (n) {

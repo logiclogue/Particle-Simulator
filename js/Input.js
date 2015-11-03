@@ -6,11 +6,11 @@ var Input = (function (self) {
 
 
 	self.hideElement = function (element) {
-		Input[element].className = "hidden";
+		Input[element].className = 'hidden';
 	};
 
 	self.showElement = function (element) {
-		Input[element].className = "";
+		Input[element].className = '';
 	};
 
 	self.load = function (arrayElements) {
@@ -20,7 +20,7 @@ var Input = (function (self) {
 	};
 
 	self.init = function () {
-		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "btn-clear", "btn-reset", "input-seed", "input-speed", "myCanvas"]);
+		self.load(['btn-run', 'btn-add', 'div-settings', 'btn-pause', 'btn-clear', 'btn-reset', 'input-seed', 'input-speed', 'myCanvas']);
 
 		Scroll.init();
 		Settings.init();

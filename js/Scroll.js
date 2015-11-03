@@ -65,21 +65,21 @@ var Scroll = (function (self) {
 
 
 	self.init = function () {
-		Input["myCanvas"].addEventListener("wheel", zoom);
-		Input["myCanvas"].addEventListener("mousedown", mousedown);
-		Input["myCanvas"].addEventListener("mousemove", mousemove);
-		Input["myCanvas"].addEventListener("mouseup", mouseup);
-		Input["myCanvas"].addEventListener("touchstart", touchstart);
-		Input["myCanvas"].addEventListener("touchmove", touchmove);
+		Input['myCanvas'].addEventListener('wheel', zoom);
+		Input['myCanvas'].addEventListener('mousedown', mousedown);
+		Input['myCanvas'].addEventListener('mousemove', mousemove);
+		Input['myCanvas'].addEventListener('mouseup', mouseup);
+		Input['myCanvas'].addEventListener('touchstart', touchstart);
+		Input['myCanvas'].addEventListener('touchmove', touchmove);
 	};
 
 	self.stop = function () {
-		Input["myCanvas"].removeEventListener("wheel", zoom);
-		Input["myCanvas"].removeEventListener("mousedown", mousedown);
-		Input["myCanvas"].removeEventListener("mousemove", mousemove);
-		Input["myCanvas"].removeEventListener("mouseup", mouseup);
-		Input["myCanvas"].removeEventListener("touchstart", touchstart);
-		Input["myCanvas"].removeEventListener("touchmove", touchmove);
+		Input['myCanvas'].removeEventListener('wheel', zoom);
+		Input['myCanvas'].removeEventListener('mousedown', mousedown);
+		Input['myCanvas'].removeEventListener('mousemove', mousemove);
+		Input['myCanvas'].removeEventListener('mouseup', mouseup);
+		Input['myCanvas'].removeEventListener('touchstart', touchstart);
+		Input['myCanvas'].removeEventListener('touchmove', touchmove);
 	};
 
 

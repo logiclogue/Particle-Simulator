@@ -17,15 +17,15 @@ var Universe = (function (self) {
 
 	function clearScreen() {
 		Canvas.ctx.globalAlpha = 1;
-		Canvas.ctx.fillStyle = "#FFFFFF";
+		Canvas.ctx.fillStyle = '#FFFFFF';
 		Canvas.ctx.fillRect(0, 0, Canvas.width, Canvas.height);
-		Canvas.ctx.fillStyle = "#000000";
+		Canvas.ctx.fillStyle = '#000000';
 		Canvas.ctx.globalAlpha = 1;
 	}
 
 
 	self.drawParticle = function (x, y, radius, colour) {
-		colour = colour || "#000000";
+		colour = colour || '#000000';
 		Canvas.ctx.fillStyle = colour;
 		Canvas.ctx.beginPath();
 		Canvas.ctx.arc(
