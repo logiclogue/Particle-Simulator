@@ -1,4 +1,5 @@
-var Add = (function (self) {
+var Add = (function (self)
+{
 	var radius = 2,
 		coord,
 		isDown = false,

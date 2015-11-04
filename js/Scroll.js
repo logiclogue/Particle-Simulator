@@ -1,4 +1,5 @@
-var Scroll = (function (self) {
+var Scroll = (function (self)
+{
 	var startX = 0,
 		startY = 0,
 		startD = 0,

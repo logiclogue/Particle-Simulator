@@ -1,4 +1,5 @@
-var Universe = (function (self) {
+var Universe = (function (self)
+{
 	var interval;
 
 	self.particles = [];

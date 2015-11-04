@@ -1,5 +1,5 @@
-var Settings = (function (self) {
-
+var Settings = (function (self)
+{
 	function runButton() {
 		Input.hideElement('div-settings');
 		Input.showElement('btn-pause');

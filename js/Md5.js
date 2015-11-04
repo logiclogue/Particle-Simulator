@@ -1,5 +1,5 @@
-var Md5 = (function (self) {
-
+var Md5 = (function (self)
+{
 	/*
 	CryptoJS v3.1.2
 	code.google.com/p/crypto-js

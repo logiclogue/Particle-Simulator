@@ -1,4 +1,5 @@
-var Spawn = (function (self) {
+var Spawn = (function (self)
+{
 	self.seed = '';
 
 	self.particles = function () {

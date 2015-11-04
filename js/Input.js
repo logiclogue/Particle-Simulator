@@ -1,5 +1,5 @@
-var Input = (function (self) {
-	
+var Input = (function (self)
+{	
 	function getElement(el_id) {
 		self[el_id] = document.getElementById(el_id);
 	}

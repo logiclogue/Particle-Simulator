@@ -1,4 +1,5 @@
-var Util = (function () {
+var Util = (function ()
+{
 	var self = this;
 
 

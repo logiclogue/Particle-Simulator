@@ -25,7 +25,7 @@ var Add = (function (self) {
 
 	function drawParticle() {
 		Universe.draw();
-		Universe.drawParticle(coord.x, coord.y, Math.pow(2, radius), "#0000FF");
+		Universe.drawParticle(coord.x, coord.y, Math.pow(2, radius), '#0000FF');
 	}
 
 	function drawLine(endX, endY) {
@@ -52,11 +52,11 @@ var Add = (function (self) {
 	}
 
 	function leave(e) {
-		Input["btn-pause"].removeEventListener("click", leave);
-		Input["myCanvas"].removeEventListener("mousedown", initPos);
-		Input["myCanvas"].removeEventListener("mouseup", addParticle);
-		Input["myCanvas"].removeEventListener("mousemove", highlightParticle);
-		Input["myCanvas"].removeEventListener("wheel", resizeMass);
+		Input['btn-pause'].removeEventListener('click', leave);
+		Input['myCanvas'].removeEventListener('mousedown', initPos);
+		Input['myCanvas'].removeEventListener('mouseup', addParticle);
+		Input['myCanvas'].removeEventListener('mousemove', highlightParticle);
+		Input['myCanvas'].removeEventListener('wheel', resizeMass);
 
 		// resume scrolling
 		Scroll.init();
@@ -73,15 +73,15 @@ var Add = (function (self) {
 		// stop drawing
 		AnimLoop.drawFunction = function () {};
 
-		Input.hideElement("div-settings");
-		Input.showElement("btn-pause");
+		Input.hideElement('div-settings');
+		Input.showElement('btn-pause');
 
 		// events
-		Input["myCanvas"].addEventListener("mousedown", initPos);
-		Input["myCanvas"].addEventListener("mouseup", addParticle);
-		Input["myCanvas"].addEventListener("mousemove", highlightParticle);
-		Input["myCanvas"].addEventListener("wheel", resizeMass);
-		Input["btn-pause"].addEventListener("click", leave);
+		Input['myCanvas'].addEventListener('mousedown', initPos);
+		Input['myCanvas'].addEventListener('mouseup', addParticle);
+		Input['myCanvas'].addEventListener('mousemove', highlightParticle);
+		Input['myCanvas'].addEventListener('wheel', resizeMass);
+		Input['btn-pause'].addEventListener('click', leave);
 	};
 
 
@@ -175,8 +175,8 @@ var AnimLoop = (function (self) {
 // resumed 05/10/15
 
 var Canvas = (function (self) {
-	self.c = document.getElementById("myCanvas");
-	self.ctx = self.c.getContext("2d");
+	self.c = document.getElementById('myCanvas');
+	self.ctx = self.c.getContext('2d');
 	self.c.width = window.innerWidth;
 	self.c.height = window.innerHeight;
 	self.width = self.c.width;
@@ -185,7 +185,7 @@ var Canvas = (function (self) {
 
 	return self;
 }({}));
-window.addEventListener("load", function () {
+window.addEventListener('load', function () {
 	Spawn.particles();
 	Input.init();
 });
@@ -197,11 +197,11 @@ var Input = (function (self) {
 
 
 	self.hideElement = function (element) {
-		Input[element].className = "hidden";
+		Input[element].className = 'hidden';
 	};
 
 	self.showElement = function (element) {
-		Input[element].className = "";
+		Input[element].className = '';
 	};
 
 	self.load = function (arrayElements) {
@@ -211,7 +211,7 @@ var Input = (function (self) {
 	};
 
 	self.init = function () {
-		self.load(["btn-run", "btn-add", "div-settings", "btn-pause", "btn-clear", "btn-reset", "input-seed", "input-speed", "myCanvas"]);
+		self.load(['btn-run', 'btn-add', 'div-settings', 'btn-pause', 'btn-clear', 'btn-reset', 'input-seed', 'input-speed', 'myCanvas']);
 
 		Scroll.init();
 		Settings.init();
@@ -244,7 +244,7 @@ var Md5 = (function (self) {
 
 	
 	self.rand = function (n) {
-		return parseInt(CryptoJS.MD5(n + ""), 16) / parseInt("ffffffffffffffffffffffffffffffff", 16);
+		return parseInt(CryptoJS.MD5(n + ''), 16) / parseInt('ffffffffffffffffffffffffffffffff', 16);
 	};
 
 	self.hash = function (n) {
@@ -421,21 +421,21 @@ var Scroll = (function (self) {
 
 
 	self.init = function () {
-		Input["myCanvas"].addEventListener("wheel", zoom);
-		Input["myCanvas"].addEventListener("mousedown", mousedown);
-		Input["myCanvas"].addEventListener("mousemove", mousemove);
-		Input["myCanvas"].addEventListener("mouseup", mouseup);
-		Input["myCanvas"].addEventListener("touchstart", touchstart);
-		Input["myCanvas"].addEventListener("touchmove", touchmove);
+		Input['myCanvas'].addEventListener('wheel', zoom);
+		Input['myCanvas'].addEventListener('mousedown', mousedown);
+		Input['myCanvas'].addEventListener('mousemove', mousemove);
+		Input['myCanvas'].addEventListener('mouseup', mouseup);
+		Input['myCanvas'].addEventListener('touchstart', touchstart);
+		Input['myCanvas'].addEventListener('touchmove', touchmove);
 	};
 
 	self.stop = function () {
-		Input["myCanvas"].removeEventListener("wheel", zoom);
-		Input["myCanvas"].removeEventListener("mousedown", mousedown);
-		Input["myCanvas"].removeEventListener("mousemove", mousemove);
-		Input["myCanvas"].removeEventListener("mouseup", mouseup);
-		Input["myCanvas"].removeEventListener("touchstart", touchstart);
-		Input["myCanvas"].removeEventListener("touchmove", touchmove);
+		Input['myCanvas'].removeEventListener('wheel', zoom);
+		Input['myCanvas'].removeEventListener('mousedown', mousedown);
+		Input['myCanvas'].removeEventListener('mousemove', mousemove);
+		Input['myCanvas'].removeEventListener('mouseup', mouseup);
+		Input['myCanvas'].removeEventListener('touchstart', touchstart);
+		Input['myCanvas'].removeEventListener('touchmove', touchmove);
 	};
 
 
@@ -444,15 +444,15 @@ var Scroll = (function (self) {
 var Settings = (function (self) {
 
 	function runButton() {
-		Input.hideElement("div-settings");
-		Input.showElement("btn-pause");
-		AnimLoop.setSpeed(Input["input-speed"].value);
+		Input.hideElement('div-settings');
+		Input.showElement('btn-pause');
+		AnimLoop.setSpeed(Input['input-speed'].value);
 		Universe.start();
 	}
 
 	function pauseButton() {
-		Input.hideElement("btn-pause");
-		Input.showElement("div-settings");
+		Input.hideElement('btn-pause');
+		Input.showElement('div-settings');
 		Universe.pause();
 	}
 
@@ -461,35 +461,35 @@ var Settings = (function (self) {
 	}
 
 	function seedChange() {
-		Spawn.seed = Input["input-seed"].value;
+		Spawn.seed = Input['input-seed'].value;
 		Universe.restart();
 		Spawn.particles();
 	}
 
 
 	self.init = function () {
-		Input["btn-run"].addEventListener("click", runButton);
-		Input["btn-pause"].addEventListener("click", pauseButton);
-		Input["btn-add"].addEventListener("click", Add.init);
-		Input["btn-clear"].addEventListener("click", clearButton);
-		Input["btn-reset"].addEventListener("click", seedChange);
-		Input["input-seed"].addEventListener("keyup", seedChange);
+		Input['btn-run'].addEventListener('click', runButton);
+		Input['btn-pause'].addEventListener('click', pauseButton);
+		Input['btn-add'].addEventListener('click', Add.init);
+		Input['btn-clear'].addEventListener('click', clearButton);
+		Input['btn-reset'].addEventListener('click', seedChange);
+		Input['input-seed'].addEventListener('keyup', seedChange);
 	};
 
 	return self;
 }({}));
 var Spawn = (function (self) {
-	self.seed = "";
+	self.seed = '';
 
 	self.particles = function () {
 		// spawn particles
 		for (var i = 0; i < 100; i += 1) {
 			var theParticle = new Particle(
-				5000 * Md5.rand(self.seed + i + "x") - 2500,
-				5000 * Md5.rand(self.seed + i + "y") - 2500
+				5000 * Md5.rand(self.seed + i + 'x') - 2500,
+				5000 * Md5.rand(self.seed + i + 'y') - 2500
 			);
 
-			theParticle.newMass(1 * Md5.rand(self.seed + "_" + i) + 50);
+			theParticle.newMass(1 * Md5.rand(self.seed + '_' + i) + 50);
 		}
 
 		Universe.start();
@@ -517,15 +517,15 @@ var Universe = (function (self) {
 
 	function clearScreen() {
 		Canvas.ctx.globalAlpha = 1;
-		Canvas.ctx.fillStyle = "#FFFFFF";
+		Canvas.ctx.fillStyle = '#FFFFFF';
 		Canvas.ctx.fillRect(0, 0, Canvas.width, Canvas.height);
-		Canvas.ctx.fillStyle = "#000000";
+		Canvas.ctx.fillStyle = '#000000';
 		Canvas.ctx.globalAlpha = 1;
 	}
 
 
 	self.drawParticle = function (x, y, radius, colour) {
-		colour = colour || "#000000";
+		colour = colour || '#000000';
 		Canvas.ctx.fillStyle = colour;
 		Canvas.ctx.beginPath();
 		Canvas.ctx.arc(

@@ -1,4 +1,5 @@
-var AnimLoop = (function (self) {
+var AnimLoop = (function (self)
+{
 	self.updateFunction = function () {};
 	self.drawFunction = function () {};
 	self.cycles = 0;
