@@ -33,5 +33,6 @@ var Settings = (function (self)
 		Input['input-seed'].addEventListener('keyup', seedChange);
 	};
 
+
 	return self;
 }({}));

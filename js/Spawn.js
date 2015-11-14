@@ -2,6 +2,7 @@ var Spawn = (function (self)
 {
 	self.seed = '';
 
+
 	self.particles = function () {
 		// spawn particles
 		for (var i = 0; i < 100; i += 1) {
@@ -16,6 +17,7 @@ var Spawn = (function (self)
 		Universe.start();
 		Universe.pause();
 	};
+
 
 	return self;
 }({}));
