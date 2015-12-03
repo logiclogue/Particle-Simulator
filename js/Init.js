@@ -1,5 +1,5 @@
-window.addEventListener('load', function ()
+window.onload = function ()
 {
 	Spawn.particles();
 	Input.init();
-});
+};

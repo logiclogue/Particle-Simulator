@@ -1,4 +1,5 @@
-var Add = (function (self) {
+var Add = (function (self)
+{
 	var radius = 2,
 		coord,
 		isDown = false,
@@ -87,7 +88,8 @@ var Add = (function (self) {
 
 	return self;
 }({}));
-var AnimLoop = (function (self) {
+var AnimLoop = (function (self)
+{
 	self.updateFunction = function () {};
 	self.drawFunction = function () {};
 	self.cycles = 0;
@@ -171,10 +173,8 @@ var AnimLoop = (function (self) {
 
 	return self;
 }({}));
-// Jordan Lord 18/12/14
-// resumed 05/10/15
-
-var Canvas = (function (self) {
+var Canvas = (function (self)
+{
 	self.c = document.getElementById('myCanvas');
 	self.ctx = self.c.getContext('2d');
 	self.c.width = window.innerWidth;
@@ -185,12 +185,13 @@ var Canvas = (function (self) {
 
 	return self;
 }({}));
-window.addEventListener('load', function () {
+window.onload = function ()
+{
 	Spawn.particles();
 	Input.init();
-});
-var Input = (function (self) {
-	
+};
+var Input = (function (self)
+{	
 	function getElement(el_id) {
 		self[el_id] = document.getElementById(el_id);
 	}
@@ -220,8 +221,8 @@ var Input = (function (self) {
 
 	return self;
 }({}));
-var Md5 = (function (self) {
-
+var Md5 = (function (self)
+{
 	/*
 	CryptoJS v3.1.2
 	code.google.com/p/crypto-js
@@ -251,9 +252,11 @@ var Md5 = (function (self) {
 		return CryptoJS.MD5(n);
 	};
 
+
 	return self;
 }({}));
-var Particle = (function () {
+var Particle = (function ()
+{
 	function Particle(_x, _y) {
 		this.x = _x;
 		this.y = _y;
@@ -354,7 +357,8 @@ var Particle = (function () {
 
 	return Particle;
 }());
-var Scroll = (function (self) {
+var Scroll = (function (self)
+{
 	var startX = 0,
 		startY = 0,
 		startD = 0,
@@ -441,8 +445,8 @@ var Scroll = (function (self) {
 
 	return self;
 }({}));
-var Settings = (function (self) {
-
+var Settings = (function (self)
+{
 	function runButton() {
 		Input.hideElement('div-settings');
 		Input.showElement('btn-pause');
@@ -476,10 +480,13 @@ var Settings = (function (self) {
 		Input['input-seed'].addEventListener('keyup', seedChange);
 	};
 
+
 	return self;
 }({}));
-var Spawn = (function (self) {
+var Spawn = (function (self)
+{
 	self.seed = '';
+
 
 	self.particles = function () {
 		// spawn particles
@@ -496,9 +503,11 @@ var Spawn = (function (self) {
 		Universe.pause();
 	};
 
+
 	return self;
 }({}));
-var Universe = (function (self) {
+var Universe = (function (self)
+{
 	var interval;
 
 	self.particles = [];
@@ -563,7 +572,8 @@ var Universe = (function (self) {
 
 	return self;
 }({}));
-var Util = (function () {
+var Util = (function ()
+{
 	var self = this;
 
 
