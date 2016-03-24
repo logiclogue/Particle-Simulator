@@ -47,7 +47,7 @@ var Add = (function (self)
 	}
 
 	function resizeMass(e) {
-		radius += e.wheelDeltaY / 1000;
+		radius += e.wheelDelta / 1000;
 
 		drawParticle();
 	}
@@ -367,7 +367,7 @@ var Scroll = (function (self)
 
 	// mouse controls
 	function zoom(e) {
-		Universe.zoom += e.wheelDeltaY / 1000;
+		Universe.zoom += e.wheelDelta / 1000;
 	}
 
 	function mousedown(e) {
@@ -416,7 +416,7 @@ var Scroll = (function (self)
 		}
 		else {
 			var distance = Util.distance(e.touches[0].pageX, e.touches[1].pageX, e.touches[0].pageY, e.touches[1].pageY);
-			
+
 			startD -= distance;
 			Universe.zoom -= startD / 1000;
 			startD = distance;
@@ -445,6 +445,7 @@ var Scroll = (function (self)
 
 	return self;
 }({}));
+
 var Settings = (function (self)
 {
 	function runButton() {
