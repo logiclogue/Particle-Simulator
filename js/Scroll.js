@@ -8,7 +8,6 @@ var Scroll = (function (self)
 
 	// mouse controls
 	function zoom(e) {
-        console.log(e);
 		Universe.zoom += e.deltaY / -100;
 	}
 

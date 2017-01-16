@@ -47,7 +47,7 @@ var Add = (function (self)
 	}
 
 	function resizeMass(e) {
-		radius += e.wheelDelta / 1000;
+		radius += e.deltaY / 100;
 
 		drawParticle();
 	}
@@ -88,6 +88,7 @@ var Add = (function (self)
 
 	return self;
 }({}));
+
 var AnimLoop = (function (self)
 {
 	self.updateFunction = function () {};
@@ -367,7 +368,6 @@ var Scroll = (function (self)
 
 	// mouse controls
 	function zoom(e) {
-        console.log(e);
 		Universe.zoom += e.deltaY / -100;
 	}
 
