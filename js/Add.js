@@ -47,7 +47,7 @@ var Add = (function (self)
 	}
 
 	function resizeMass(e) {
-		radius += e.wheelDelta / 1000;
+		radius += e.deltaY / -100;
 
 		drawParticle();
 	}
